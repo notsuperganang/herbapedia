@@ -15,7 +15,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center space-x-2">
             <div className="relative w-8 h-8">
               <Image
-                src="/globe.svg"
+                src="/logo.png"
                 alt="Herbapedia Logo"
                 fill
                 className="object-contain"
