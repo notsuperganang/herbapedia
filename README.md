@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌿 Herbapedia - Ensiklopedia Tanaman Obat Indonesia
 
-## Getting Started
+![Herbapedia Logo](public/logo.png)
 
-First, run the development server:
+Herbapedia adalah platform digital komprehensif yang mendokumentasikan kekayaan tanaman obat tradisional Indonesia. Dibangun dengan teknologi modern, Herbapedia bertujuan untuk melestarikan pengetahuan lokal dan mendorong upaya pelestarian lingkungan hijau.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Fitur Utama
+
+- **📚 Katalog Tanaman Obat** - Lebih dari 100+ jenis tanaman obat tradisional dengan informasi lengkap
+- **🔍 Pencarian & Filter** - Temukan tanaman berdasarkan nama, manfaat, atau asal daerah
+- **📝 Artikel Edukasi** - Konten informatif tentang budidaya, manfaat, dan pelestarian
+- **📱 Responsif** - Tampilan optimal di semua perangkat
+
+## 🛠️ Teknologi
+
+Herbapedia dibangun menggunakan stack teknologi modern:
+
+- **Next.js** - Framework React yang memberikan pengalaman pengembangan yang luar biasa
+- **React** - Library JavaScript untuk membangun antarmuka pengguna
+- **TypeScript** - Superset JavaScript dengan typing statis
+- **Tailwind CSS** - Framework CSS utility-first untuk desain yang cepat dan responsif
+- **Node.js** - Runtime JavaScript untuk menjalankan aplikasi di server
+
+## 🚀 Memulai
+
+### Prasyarat
+
+- Node.js (versi 14.0.0 atau lebih baru)
+- npm (versi 6.0.0 atau lebih baru)
+
+### Instalasi
+
+1. Clone repositori ini
+   ```bash
+   git clone https://github.com/username/herbapedia.git
+   cd herbapedia
+   ```
+
+2. Install dependensi
+   ```bash
+   npm install
+   ```
+
+3. Jalankan server pengembangan
+   ```bash
+   npm run dev
+   ```
+
+4. Buka [http://localhost:3000](http://localhost:3000) di browser Anda
+
+## 📂 Struktur Proyek
+
+```
+herbapedia/
+├── public/           # Aset statis (gambar, ikon)
+│   ├── articles/     # Gambar untuk artikel
+│   └── plants/       # Gambar tanaman
+├── src/              # Kode sumber
+│   ├── app/          # Halaman aplikasi (Next.js App Router)
+│   │   ├── artikel/  # Halaman artikel
+│   │   ├── katalog/  # Halaman katalog tanaman
+│   │   ├── kontak/   # Halaman kontak
+│   │   ├── tanaman/  # Halaman detail tanaman
+│   │   └── tentang/  # Halaman tentang kami
+│   └── components/   # Komponen React yang dapat digunakan kembali
+│       ├── articles/ # Komponen terkait artikel
+│       ├── catalog/  # Komponen terkait katalog
+│       ├── contact/  # Komponen terkait kontak
+│       ├── home/     # Komponen halaman beranda
+│       └── plants/   # Komponen terkait tanaman
+└── ...               # File konfigurasi dan lainnya
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🖼️ Screenshot
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+![Homepage](public/readme/homepage.png)
+![Katalog](public/readme/catalog.png)
+![Detail Tanaman](public/readme/detail.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌱 Kontribusi
 
-## Learn More
+Kami sangat menghargai kontribusi dari komunitas! Jika Anda tertarik untuk berkontribusi pada Herbapedia, silakan ikuti langkah-langkah berikut:
 
-To learn more about Next.js, take a look at the following resources:
+1. Fork repositori ini
+2. Buat branch fitur baru (`git checkout -b feature/amazing-feature`)
+3. Commit perubahan Anda (`git commit -m 'Add some amazing feature'`)
+4. Push ke branch (`git push origin feature/amazing-feature`)
+5. Buka Pull Request
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 Lisensi
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Proyek ini dilisensikan di bawah Lisensi MIT - lihat file [LICENSE](LICENSE) untuk detail.
 
-## Deploy on Vercel
+Saya akan memperbaiki bagian penghargaan dalam README untuk menampilkan tim pengembang dengan foto yang Anda sebutkan. Berikut revisinya:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 👨‍💻 Tim Pengembang
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<div align="center">
+  <img src="public/ganang.jpg" alt="Ganang Setyo Hadi" width="150" style="border-radius: 50%"/>
+  <h3>Ganang Setyo Hadi</h3>
+  <p><i>Pengembang</i></p>
+  <p>Berperan penting dalam mengembangkan sistem Herbapedia untuk memudahkan masyarakat mengakses informasi tanaman obat.</p>
+  
+  <img src="public/alghi.jpg" alt="Muhammad Khalid Al Ghifari" width="150" style="border-radius: 50%"/>
+  <h3>Muhammad Khalid Al Ghifari</h3>
+  <p><i>Pengembang</i></p>
+  <p>Berfokus pada pengembangan antarmuka dan pengalaman pengguna dalam aplikasi Herbapedia.</p>
+</div>
+
+---
+
+<p align="center">Dibuat dengan ❤️ untuk melestarikan warisan budaya Indonesia</p>
+
+<p align="center">
+  <a href="https://github.com/username/herbapedia/issues">Laporkan Bug</a> •
+  <a href="https://github.com/username/herbapedia/issues">Request Fitur</a>
+</p>
