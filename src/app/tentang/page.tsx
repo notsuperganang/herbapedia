@@ -92,21 +92,16 @@ export default function TentangPage() {
               <div className="h-1 w-20 bg-primary-500 mx-auto"></div>
             </div>
             
-            <div className="prose max-w-none text-gray-600">
+            <div className="prose max-w-none text-gray-600 text-justify">
+
               <p>
-                Herbapedia didirikan pada tahun 2020 sebagai respons terhadap kekhawatiran akan semakin lunturnya pengetahuan tradisional tentang tanaman obat di Indonesia. Kami menyadari bahwa banyak pengetahuan berharga yang hanya diturunkan secara lisan dari generasi ke generasi berisiko hilang seiring waktu.
+                Herbapedia didirikan pada tahun 2025 sebagai respons terhadap kekhawatiran akan semakin lunturnya pengetahuan tradisional tentang tanaman obat di Indonesia. Kami menyadari bahwa banyak pengetahuan berharga yang hanya diturunkan secara lisan dari generasi ke generasi berisiko hilang seiring waktu.
               </p>
               
               <p>
-                Tim kami terdiri dari para ahli etnobotani, praktisi pengobatan tradisional, peneliti, dan pecinta lingkungan yang bersatu dalam misi untuk mendokumentasikan, melestarikan, dan membagikan pengetahuan tentang tanaman obat tradisional Indonesia.
-              </p>
-              
+              Melalui studi literatur dari berbagai sumber daring dan buku-buku terpercaya, kami menghimpun informasi mengenai pemanfaatan tanaman obat dari kearifan lokal yang masih dijaga oleh masyarakat di berbagai daerah di Indonesia.              </p>
               <p>
-                Melalui riset lapangan yang ekstensif di berbagai daerah di Indonesia, kami mengumpulkan informasi langsung dari para tetua adat, dukun tradisional, dan masyarakat lokal yang masih menjaga kearifan lokal terkait pemanfaatan tanaman obat.
-              </p>
-              
-              <p>
-                Saat ini, Herbapedia telah berkembang menjadi platform ensiklopedia digital yang komprehensif, menyediakan informasi tentang ratusan jenis tanaman obat tradisional Indonesia beserta manfaat, cara penggunaan, dan upaya pelestariannya.
+                Saat ini, Herbapedia telah berkembang menjadi platform ensiklopedia digital yang komprehensif, menyediakan informasi tentang berbagai jenis tanaman obat tradisional Indonesia beserta manfaat, cara penggunaan, dan upaya pelestariannya.
               </p>
               
               <p>
@@ -118,71 +113,39 @@ export default function TentangPage() {
       </section>
       
       {/* Our Team */}
-      <section className="py-16 bg-white">
-        <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">Tim Kami</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">
-              Kenali sosok-sosok di balik Herbapedia yang berdedikasi untuk melestarikan pengetahuan tanaman obat tradisional Indonesia.
-            </p>
-            <div className="h-1 w-20 bg-primary-500 mx-auto mt-4"></div>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="relative h-48 w-48 mx-auto rounded-full overflow-hidden mb-4">
-                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                  <svg className="h-24 w-24 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-800">Dr. Budi Santoso</h3>
-              <p className="text-primary-600 mb-2">Pendiri & Etnobotanis</p>
-              <p className="text-gray-600 text-sm">Ahli etnobotani dengan pengalaman 20 tahun riset tanaman obat tradisional di berbagai daerah Indonesia.</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="relative h-48 w-48 mx-auto rounded-full overflow-hidden mb-4">
-                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                  <svg className="h-24 w-24 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-800">Dewi Lestari, M.Si</h3>
-              <p className="text-primary-600 mb-2">Peneliti Utama</p>
-              <p className="text-gray-600 text-sm">Spesialis biologi konservasi yang fokus pada pelestarian tanaman obat langka di Indonesia.</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="relative h-48 w-48 mx-auto rounded-full overflow-hidden mb-4">
-                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                  <svg className="h-24 w-24 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-800">Hendra Wijaya</h3>
-              <p className="text-primary-600 mb-2">Pengembang Web</p>
-              <p className="text-gray-600 text-sm">Pengembang web berpengalaman yang mendesain dan mengembangkan platform Herbapedia.</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="relative h-48 w-48 mx-auto rounded-full overflow-hidden mb-4">
-                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                  <svg className="h-24 w-24 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-800">Siti Rahayu</h3>
-              <p className="text-primary-600 mb-2">Editor Konten</p>
-              <p className="text-gray-600 text-sm">Penulis dan editor dengan keahlian dalam menyederhanakan informasi ilmiah menjadi konten yang mudah dipahami.</p>
-            </div>
-          </div>
+<section className="py-16 bg-white">
+  <div className="container-custom">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-gray-800 mb-4">Tim Kami</h2>
+      <p className="text-gray-600 max-w-3xl mx-auto">
+        Kenali sosok-sosok di balik Herbapedia yang berdedikasi untuk melestarikan pengetahuan tanaman obat tradisional Indonesia.
+      </p>
+      <div className="h-1 w-20 bg-primary-500 mx-auto mt-4"></div>
+    </div>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+      {/* Ganang */}
+      <div className="text-center">
+        <div className="relative h-48 w-48 mx-auto rounded-full overflow-hidden mb-4">
+          <img src="/ganang.jpg" alt="Ganang Setyo Hadi" className="h-full w-full object-cover" />
         </div>
-      </section>
+        <h3 className="text-lg font-semibold text-gray-800">Ganang Setyo Hadi</h3>
+        <p className="text-primary-600 mb-2">Pengembang</p>
+        <p className="text-gray-600 text-sm">Berperan penting dalam mengembangkan sistem Herbapedia untuk memudahkan masyarakat mengakses informasi tanaman obat.</p>
+      </div>
+
+      {/* Alghi */}
+      <div className="text-center">
+        <div className="relative h-48 w-48 mx-auto rounded-full overflow-hidden mb-4">
+          <img src="/alghi.jpg" alt="Muhammad Khalid Al Ghifari" className="h-full w-full object-cover" />
+        </div>
+        <h3 className="text-lg font-semibold text-gray-800">Muhammad Khalid Al Ghifari</h3>
+        <p className="text-primary-600 mb-2">Pengembang</p>
+        <p className="text-gray-600 text-sm">Berfokus pada pengembangan antarmuka dan pengalaman pengguna dalam aplikasi Herbapedia.</p>
+      </div>
+    </div>
+  </div>
+</section>
       
       {/* CTA */}
       <section className="bg-primary-700 text-white py-16">

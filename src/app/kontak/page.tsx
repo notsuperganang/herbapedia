@@ -52,7 +52,7 @@ export default function KontakPage() {
                       </div>
                       <div>
                         <p className="text-sm font-medium text-gray-900">Telepon</p>
-                        <p className="text-sm text-gray-600">+62 812 3456 7890</p>
+                        <p className="text-sm text-gray-600">+62 853 3857 3726</p>
                       </div>
                     </div>
                     
@@ -65,9 +65,7 @@ export default function KontakPage() {
                       <div>
                         <p className="text-sm font-medium text-gray-900">Alamat</p>
                         <p className="text-sm text-gray-600">
-                          Jl. Tanaman Obat No. 123<br />
-                          Kota Jakarta, 12345<br />
-                          Indonesia
+                          Universitas Syiah Kuala, Banda Aceh, Indonesia
                         </p>
                       </div>
                     </div>
