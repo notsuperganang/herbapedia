@@ -34,7 +34,7 @@ Herbapedia dibangun menggunakan stack teknologi modern:
 
 1. Clone repositori ini
    ```bash
-   git clone https://github.com/username/herbapedia.git
+   git clone https://github.com/notsuperganang/herbapedia.git
    cd herbapedia
    ```
 
@@ -92,8 +92,6 @@ Kami sangat menghargai kontribusi dari komunitas! Jika Anda tertarik untuk berko
 ## 📄 Lisensi
 
 Proyek ini dilisensikan di bawah Lisensi MIT - lihat file [LICENSE](LICENSE) untuk detail.
-
-Saya akan memperbaiki bagian penghargaan dalam README untuk menampilkan tim pengembang dengan foto yang Anda sebutkan. Berikut revisinya:
 
 ## 👨‍💻 Tim Pengembang
 
