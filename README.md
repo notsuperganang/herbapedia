@@ -1,6 +1,8 @@
 # 🌿 Herbapedia - Ensiklopedia Tanaman Obat Indonesia
 
-![Herbapedia Logo](public/logo.png)
+<div align="center">
+  <img src="public/logo.jpg" alt="Logo HerbaPedia" width="400"/>
+</div>
 
 Herbapedia adalah platform digital komprehensif yang mendokumentasikan kekayaan tanaman obat tradisional Indonesia. Dibangun dengan teknologi modern, Herbapedia bertujuan untuk melestarikan pengetahuan lokal dan mendorong upaya pelestarian lingkungan hijau.
 
