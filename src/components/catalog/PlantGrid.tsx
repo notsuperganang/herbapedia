@@ -1,116 +1,56 @@
+// src/components/catalog/PlantGrid.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { IPlant } from '@/lib/models/Plant'; // Asumsi IPlant ada di sini
 
-// Data tanaman (dummy)
-const plants = [
-  {
-    id: 1,
-    name: 'Jahe',
-    latinName: 'Zingiber officinale',
-    description: 'Tanaman rimpang yang dikenal dengan aroma khasnya, biasa digunakan untuk menghangatkan tubuh dan meredakan masalah pencernaan.',
-    benefits: ['Meredakan mual', 'Menghangatkan tubuh', 'Anti-inflamasi'],
-    region: 'Asia Tenggara',
-    parts: ['Rimpang'],
-    image: '/plants/jahe.jpg',
-    slug: 'jahe',
-  },
-  {
-    id: 2,
-    name: 'Kunyit',
-    latinName: 'Curcuma longa',
-    description: 'Rimpang berwarna oranye kekuningan dengan rasa pahit, sering digunakan sebagai bumbu dan memiliki sifat antioksidan tinggi.',
-    benefits: ['Antioksidan', 'Anti-inflamasi', 'Meningkatkan pencernaan'],
-    region: 'Asia Selatan',
-    parts: ['Rimpang'],
-    image: '/plants/kunyit.jpg',
-    slug: 'kunyit',
-  },
-  {
-    id: 3,
-    name: 'Temulawak',
-    latinName: 'Curcuma zanthorrhiza',
-    description: 'Rimpang kuning kecokelatan dengan rasa pahit, secara tradisional digunakan untuk menjaga kesehatan hati dan meningkatkan nafsu makan.',
-    benefits: ['Kesehatan hati', 'Nafsu makan', 'Daya tahan tubuh'],
-    region: 'Indonesia',
-    parts: ['Rimpang'],
-    image: '/plants/temulawak.jpg',
-    slug: 'temulawak',
-  },
-  {
-    id: 4,
-    name: 'Kencur',
-    latinName: 'Kaempferia galanga',
-    description: 'Rimpang aromatik yang memiliki rasa pahit dan pedas, digunakan untuk mengatasi masuk angin dan meredakan batuk.',
-    benefits: ['Meredakan batuk', 'Mengatasi masuk angin', 'Anti radang'],
-    region: 'Indonesia',
-    parts: ['Rimpang'],
-    image: '/plants/kencur.jpg',
-    slug: 'kencur',
-  },
-  {
-    id: 5,
-    name: 'Daun Sirih',
-    latinName: 'Piper betle',
-    description: 'Daun hijau dengan permukaan mengkilap, memiliki sifat antiseptik dan digunakan untuk mengatasi berbagai masalah kesehatan.',
-    benefits: ['Antiseptik', 'Menyembuhkan luka', 'Mengurangi bau mulut'],
-    region: 'Asia Tenggara',
-    parts: ['Daun'],
-    image: '/plants/sirih.jpg',
-    slug: 'daun-sirih',
-  },
-  {
-    id: 6,
-    name: 'Lidah Buaya',
-    latinName: 'Aloe vera',
-    description: 'Tanaman berdaging dengan getah bening di dalamnya, berguna untuk perawatan kulit dan rambut serta memiliki sifat anti-inflamasi.',
-    benefits: ['Melembabkan kulit', 'Menyembuhkan luka bakar', 'Anti-inflamasi'],
-    region: 'Afrika Utara',
-    parts: ['Daun', 'Gel'],
-    image: '/plants/lidah-buaya.jpg',
-    slug: 'lidah-buaya',
-  },
-  {
-    id: 7,
-    name: 'Kumis Kucing',
-    latinName: 'Orthosiphon aristatus',
-    description: 'Tanaman dengan bunga menyerupai kumis kucing, secara tradisional digunakan untuk mengatasi masalah ginjal dan saluran kemih.',
-    benefits: ['Kesehatan ginjal', 'Diuretik', 'Anti radang'],
-    region: 'Asia Tenggara',
-    parts: ['Daun', 'Batang'],
-    image: '/plants/kumis-kucing.jpg',
-    slug: 'kumis-kucing',
-  },
-  {
-    id: 8,
-    name: 'Sambiloto',
-    latinName: 'Andrographis paniculata',
-    description: 'Tanaman dengan rasa sangat pahit, dikenal sebagai "raja pahit" dan digunakan untuk meningkatkan kekebalan tubuh dan mengatasi demam.',
-    benefits: ['Menurunkan demam', 'Meningkatkan imunitas', 'Anti virus'],
-    region: 'India dan Asia Tenggara',
-    parts: ['Daun', 'Batang'],
-    image: '/plants/sambiloto.jpg',
-    slug: 'sambiloto',
-  },
-];
-
-// Opsi sort
+// Opsi sort bisa tetap ada
 const sortOptions = [
   { id: 'name-asc', name: 'Nama (A-Z)' },
   { id: 'name-desc', name: 'Nama (Z-A)' },
-  { id: 'region', name: 'Daerah Asal' },
+  { id: 'region', name: 'Daerah Asal (A-Z)' }, // Disesuaikan
 ];
 
 export default function PlantGrid() {
+  const [plants, setPlants] = useState<IPlant[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name-asc');
   
+  useEffect(() => {
+    const fetchPlants = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch('/api/plants'); // Mengambil data dari API
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.error || 'Failed to fetch plants from API');
+        }
+        const data = await res.json();
+        if (data.success) {
+          setPlants(data.data);
+        } else {
+          throw new Error(data.error || 'API returned success:false');
+        }
+      } catch (err: any) {
+        setError(err.message);
+        console.error("Error in PlantGrid fetchPlants:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPlants();
+  }, []); // Hanya dijalankan sekali saat komponen dimuat
+
   // Filter plants berdasarkan pencarian
   const filteredPlants = plants.filter(plant => 
     plant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    plant.latinName.toLowerCase().includes(searchTerm.toLowerCase())
+    (plant.latinName && plant.latinName.toLowerCase().includes(searchTerm.toLowerCase()))
   );
   
   // Sort plants
@@ -120,15 +60,24 @@ export default function PlantGrid() {
     } else if (sortBy === 'name-desc') {
       return b.name.localeCompare(a.name);
     } else if (sortBy === 'region') {
-      return a.region.localeCompare(b.region);
+      // Pastikan field 'region' ada dan bisa dibandingkan
+      return (a.region || '').localeCompare(b.region || '');
     }
     return 0;
   });
 
+  if (loading) {
+    return <div className="text-center py-10">Loading plants catalog...</div>;
+  }
+
+  if (error) {
+    return <div className="p-4 bg-red-100 text-red-700 rounded-md">Error loading plants: {error}</div>;
+  }
+
   return (
     <div>
       {/* Search & Sort */}
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4 p-4 bg-white rounded-lg shadow">
         <div className="relative flex-grow max-w-md">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -147,7 +96,7 @@ export default function PlantGrid() {
         <div className="flex items-center">
           <span className="text-sm text-gray-500 mr-2">Urut berdasarkan:</span>
           <select
-            className="border border-gray-300 rounded-md text-sm focus:ring-primary-500 focus:border-primary-500"
+            className="border border-gray-300 rounded-md text-sm py-2 px-3 focus:ring-primary-500 focus:border-primary-500"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
           >
@@ -160,31 +109,37 @@ export default function PlantGrid() {
         </div>
       </div>
       
-      {/* Results */}
+      {/* Results Count */}
       <div className="mb-4">
-        <p className="text-sm text-gray-500">
-          Menampilkan {sortedPlants.length} tanaman
+        <p className="text-sm text-gray-600">
+          Menampilkan {sortedPlants.length} dari {plants.length} tanaman.
         </p>
       </div>
       
       {/* Plant Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {sortedPlants.map((plant) => (
-          <Link key={plant.id} href={`/tanaman/${plant.slug}`} className="block">
-            <div className="card h-full hover:translate-y-[-5px] transition-all duration-300">
-            <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
+          <Link key={plant._id as string} href={`/tanaman/${plant.slug}`} className="block group">
+            <div className="card h-full group-hover:shadow-xl group-hover:translate-y-[-5px] transition-all duration-300 flex flex-col">
+            <div className="relative h-56 w-full overflow-hidden rounded-t-lg">
               <Image
-                src={plant.image}
+                src={plant.image || 'https://placehold.co/600x400/EBF4FF/7F9CF5?text=No+Image'} // Fallback jika image kosong
                 alt={plant.name}
-                fill
-                className="object-cover"
+                fill // Menggunakan fill untuk object-fit
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                onError={(e) => {
+                    // Ganti dengan placeholder jika gambar gagal dimuat
+                    e.currentTarget.srcset = 'https://placehold.co/600x400/EBF4FF/7F9CF5?text=Img+Error';
+                    e.currentTarget.src = 'https://placehold.co/600x400/EBF4FF/7F9CF5?text=Img+Error';
+                }}
               />
             </div>
               
-              <div className="p-5">
-                <h3 className="text-lg font-semibold text-gray-800">{plant.name}</h3>
+              <div className="p-5 flex flex-col flex-grow">
+                <h3 className="text-lg font-semibold text-gray-800 group-hover:text-primary-600 transition-colors">{plant.name}</h3>
                 <p className="text-sm italic text-gray-500 mb-2">{plant.latinName}</p>
-                <p className="text-gray-600 text-sm mb-3 line-clamp-2">{plant.description}</p>
+                <p className="text-gray-600 text-sm mb-3 line-clamp-2 flex-grow">{plant.description}</p>
                 
                 <div className="flex flex-wrap gap-1 mb-3">
                   {plant.benefits.slice(0, 2).map((benefit, index) => (
@@ -193,15 +148,17 @@ export default function PlantGrid() {
                     </span>
                   ))}
                   {plant.benefits.length > 2 && (
-                    <span className="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-800 rounded-full">
-                      +{plant.benefits.length - 2}
+                    <span className="inline-block px-2 py-1 text-xs bg-gray-200 text-gray-700 rounded-full">
+                      +{plant.benefits.length - 2} lainnya
                     </span>
                   )}
                 </div>
                 
-                <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center justify-between text-sm mt-auto pt-3 border-t border-gray-100">
                   <span className="text-gray-500">{plant.region}</span>
-                  <span className="text-primary-600 font-medium">Detail</span>
+                  <span className="text-primary-600 font-medium group-hover:underline">
+                    Lihat Detail
+                  </span>
                 </div>
               </div>
             </div>
@@ -210,15 +167,26 @@ export default function PlantGrid() {
       </div>
       
       {/* Empty State */}
-      {sortedPlants.length === 0 && (
-        <div className="bg-white rounded-lg shadow-sm p-8 text-center">
+      {sortedPlants.length === 0 && searchTerm && (
+        <div className="bg-white rounded-lg shadow-sm p-8 text-center col-span-full mt-6">
           <svg className="h-12 w-12 mx-auto text-gray-400 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <h3 className="text-lg font-semibold text-gray-800 mb-2">Tidak Ditemukan</h3>
           <p className="text-gray-600">
-            Maaf, tidak ada tanaman yang sesuai dengan pencarian "{searchTerm}". Coba kata kunci lain atau reset filter.
+            Maaf, tidak ada tanaman yang sesuai dengan pencarian "{searchTerm}". Coba kata kunci lain.
           </p>
+        </div>
+      )}
+       {plants.length === 0 && !loading && !error && (
+         <div className="bg-white rounded-lg shadow-sm p-8 text-center col-span-full mt-6">
+            <svg className="h-12 w-12 mx-auto text-gray-400 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10m0 0h16M4 7L12 3l8 4M4 7l8 4m8-4l-8 4m0 0v10m0-10L4 7m8 4l8-4" />
+            </svg>
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">Belum Ada Tanaman</h3>
+            <p className="text-gray-600">
+                Saat ini belum ada data tanaman di katalog. Silakan tambahkan melalui panel admin.
+            </p>
         </div>
       )}
     </div>
