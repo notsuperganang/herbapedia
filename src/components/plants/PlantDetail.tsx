@@ -1,33 +1,13 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { IPlant } from '@/lib/models/Plant';
 
-type Plant = {
-  id: number;
-  name: string;
-  latinName: string;
-  description: string;
-  benefits: string[];
-  uses: string;
-  region: string;
-  parts: string[];
-  habitat: string;
-  cultivation: string;
-  history: string;
-  image: string;
-  slug: string;
-  scientificClassification: {
-    kingdom: string;
-    division: string;
-    class: string;
-    order: string;
-    family: string;
-    genus: string;
-    species: string;
-  };
-  related: number[];
-};
+export default function PlantDetail({ plant }: { plant: IPlant }) {
+  const [imageError, setImageError] = useState(false);
 
-export default function PlantDetail({ plant }: { plant: Plant }) {
   return (
     <section className="py-12 bg-white">
       <div className="container-custom">
@@ -46,11 +26,25 @@ export default function PlantDetail({ plant }: { plant: Plant }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Plant Image */}
           <div className="relative h-96 lg:h-full rounded-lg overflow-hidden shadow-md">
-            <img
-              src={plant.image}
-              alt={plant.name}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+            {!imageError ? (
+              <Image
+                src={plant.image || 'https://placehold.co/600x400/EBF4FF/7F9CF5?text=No+Image'}
+                alt={plant.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                onError={() => setImageError(true)}
+              />
+            ) : (
+              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                <div className="text-center">
+                  <svg className="h-16 w-16 mx-auto text-gray-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <p className="text-gray-500 text-sm">Gambar tidak tersedia</p>
+                </div>
+              </div>
+            )}
           </div>
           
           {/* Plant Info */}

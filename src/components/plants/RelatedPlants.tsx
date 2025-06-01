@@ -1,70 +1,23 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { IPlant } from '@/lib/models/Plant';
 
-// Data tanaman (dummy)
-const plantsData = [
-  {
-    id: 1,
-    name: "Jahe",
-    latinName: "Zingiber officinale",
-    image: "/plants/jahe.jpg",
-    benefits: "Meredakan masalah pencernaan, peradangan, dan mual",
-    region: "Asia Tenggara",
-    slug: "jahe",
-  },
-  {
-    id: 2,
-    name: "Kunyit",
-    latinName: "Curcuma longa",
-    image: "/plants/kunyit.jpg",
-    benefits:
-      "Antioksidan, anti-inflamasi, dan meningkatkan kesehatan pencernaan",
-    region: "Asia Selatan",
-    slug: "kunyit",
-  },
-  {
-    id: 3,
-    name: "Kencur",
-    latinName: "Kaempferia galanga",
-    image: "/plants/kencur.jpg",
-    benefits: "Meredakan batuk, masuk angin, dan mengurangi nyeri sendi",
-    region: "Indonesia",
-    slug: "kencur",
-  },
-  {
-    id: 4,
-    name: "Temulawak",
-    latinName: "Curcuma zanthorrhiza",
-    image: "/plants/temulawak.jpg",
-    benefits:
-      "Menjaga kesehatan hati, meningkatkan nafsu makan, dan daya tahan tubuh",
-    region: "Indonesia",
-    slug: "temulawak",
-  },
-  {
-    id: 5,
-    name: "Daun Sirih",
-    latinName: "Piper betle",
-    image: "/plants/sirih.jpg",
-    benefits: "Antiseptik, menyembuhkan luka, dan mengurangi bau mulut",
-    region: "Asia Tenggara",
-    slug: "daun-sirih",
-  },
-];
+interface RelatedPlantsProps {
+  currentPlantId: string;
+  relatedPlantsData: IPlant[];
+}
 
 export default function RelatedPlants({
   currentPlantId,
-  relatedIds,
-}: {
-  currentPlantId: number;
-  relatedIds: number[];
-}) {
-  // Filter tanaman terkait dari data
-  const relatedPlants = plantsData.filter((plant) =>
-    relatedIds.includes(plant.id)
-  );
+  relatedPlantsData,
+}: RelatedPlantsProps) {
+  // If relatedPlantsData is already populated, use it directly
+  // Otherwise, we could fetch from API, but since it's already populated, we use the data
 
-  if (relatedPlants.length === 0) {
+  if (!relatedPlantsData || relatedPlantsData.length === 0) {
     return null;
   }
 
@@ -73,17 +26,19 @@ export default function RelatedPlants({
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Tanaman Terkait</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {relatedPlants.map((plant) => (
-          <Link key={plant.id} href={`/tanaman/${plant.slug}`}>
+        {relatedPlantsData.map((plant) => (
+          <Link key={plant._id as string} href={`/tanaman/${plant.slug}`}>
             <div className="card h-full hover:translate-y-[-5px] transition-all duration-300">
               <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
                 <Image
-                  src={plant.image}
+                  src={plant.image || 'https://placehold.co/600x400/EBF4FF/7F9CF5?text=No+Image'}
                   alt={plant.name}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-t-lg"
-                  priority
+                  fill
+                  className="object-cover rounded-t-lg"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://placehold.co/600x400/EBF4FF/7F9CF5?text=Img+Error';
+                  }}
                 />
               </div>
 
@@ -94,7 +49,25 @@ export default function RelatedPlants({
                 <p className="text-sm italic text-gray-500 mb-2">
                   {plant.latinName}
                 </p>
-                <p className="text-gray-600 text-sm mb-3">{plant.benefits}</p>
+                
+                {/* Show first 2 benefits */}
+                <div className="mb-3">
+                  {plant.benefits && plant.benefits.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                      {plant.benefits.slice(0, 2).map((benefit, index) => (
+                        <span key={index} className="inline-block px-2 py-1 text-xs bg-primary-100 text-primary-800 rounded-full">
+                          {benefit}
+                        </span>
+                      ))}
+                      {plant.benefits.length > 2 && (
+                        <span className="inline-block px-2 py-1 text-xs bg-gray-200 text-gray-700 rounded-full">
+                          +{plant.benefits.length - 2}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+                
                 <div className="flex items-center text-sm text-gray-500">
                   <svg
                     className="h-4 w-4 mr-1"

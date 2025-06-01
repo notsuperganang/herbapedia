@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>; // Changed: params is now Promise
 };
 
 // Fungsi untuk mengambil data artikel berdasarkan slug
@@ -30,7 +30,7 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const slug = params.slug;
+  const { slug } = await params; // Fixed: await params first
   const article = await getArticleBySlug(slug);
 
   if (!article) {
@@ -61,7 +61,7 @@ export async function generateStaticParams() {
 }
 
 export default async function ArticleDetailPage({ params }: Props) {
-  const slug = params.slug;
+  const { slug } = await params; // Fixed: await params first
   const article = await getArticleBySlug(slug);
 
   if (!article) {
@@ -148,18 +148,11 @@ export default async function ArticleDetailPage({ params }: Props) {
               </div>
             </header>
 
-            {/* Featured Image */}
-            <div className="relative h-64 md:h-96 w-full overflow-hidden rounded-lg mb-8">
-              <Image
-                src={article.image || 'https://placehold.co/800x400/EBF4FF/7F9CF5?text=No+Image'}
-                alt={article.title}
-                fill
-                className="object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = 'https://placehold.co/800x400/EBF4FF/7F9CF5?text=Img+Error';
-                }}
-              />
-            </div>
+            {/* Featured Image - Client Component */}
+            <ArticleImage 
+              image={article.image} 
+              title={article.title} 
+            />
 
             {/* Article Content */}
             <div className="prose prose-lg max-w-none">
@@ -202,6 +195,24 @@ export default async function ArticleDetailPage({ params }: Props) {
           </Link>
         </div>
       </section>
+    </div>
+  );
+}
+
+// Separate Client Component for Image to handle onError
+'use client';
+function ArticleImage({ image, title }: { image: string; title: string }) {
+  return (
+    <div className="relative h-64 md:h-96 w-full overflow-hidden rounded-lg mb-8">
+      <Image
+        src={image || 'https://placehold.co/800x400/EBF4FF/7F9CF5?text=No+Image'}
+        alt={title}
+        fill
+        className="object-cover"
+        onError={(e) => {
+          e.currentTarget.src = 'https://placehold.co/800x400/EBF4FF/7F9CF5?text=Img+Error';
+        }}
+      />
     </div>
   );
 }

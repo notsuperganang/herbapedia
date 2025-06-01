@@ -1,34 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { IPlant } from '@/lib/models/Plant';
 
-type PlantProps = {
-  id: number;
-  name: string;
-  latinName: string;
-  description: string;
-  benefits: string[];
-  uses: string;
-  region: string;
-  parts: string[];
-  habitat: string;
-  cultivation: string;
-  history: string;
-  image: string;
-  slug: string;
-  scientificClassification: {
-    kingdom: string;
-    division: string;
-    class: string;
-    order: string;
-    family: string;
-    genus: string;
-    species: string;
-  };
-  related: number[];
-};
-
-export default function PlantTabs({ plant }: { plant: PlantProps }) {
+export default function PlantTabs({ plant }: { plant: IPlant }) {
   const [activeTab, setActiveTab] = useState('habitat');
 
   return (
@@ -120,7 +95,7 @@ export default function PlantTabs({ plant }: { plant: PlantProps }) {
                   <span className="font-medium">Persiapan lahan</span>: Pilih lahan dengan tanah gembur yang kaya akan humus. Pastikan lahan memiliki drainase yang baik agar tidak tergenang air.
                 </li>
                 <li>
-                  <span className="font-medium">Pemilihan bibit</span>: Pilih bibit yang sehat dan bebas dari penyakit. Untuk tanaman {plant.name}, biasanya digunakan {plant.parts[0]} sebagai bahan perbanyakan.
+                  <span className="font-medium">Pemilihan bibit</span>: Pilih bibit yang sehat dan bebas dari penyakit. Untuk tanaman {plant.name}, biasanya digunakan {plant.parts && plant.parts[0]} sebagai bahan perbanyakan.
                 </li>
                 <li>
                   <span className="font-medium">Penanaman</span>: Tanam bibit dengan jarak yang cukup untuk memberikan ruang tumbuh yang optimal.
