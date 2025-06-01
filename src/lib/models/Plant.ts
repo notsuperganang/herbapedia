@@ -31,6 +31,11 @@ export interface IPlant extends Document {
   updatedAt?: Date;
 }
 
+// Interface untuk Plant yang sudah di-populate relatedPlants
+export interface IPlantPopulated extends Omit<IPlant, 'relatedPlants'> {
+  relatedPlants?: IPlant[];
+}
+
 const ScientificClassificationSchema: Schema<IScientificClassification> = new Schema({
   kingdom: { type: String, required: true },
   division: { type: String },

@@ -3,7 +3,7 @@ import dbConnect from '@/lib/dbConnect';
 import Article, { IArticle } from '@/lib/models/Article';
 import { Metadata, ResolvingMetadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
+import ArticleImage from '@/components/articles/ArticleImage';
 
 type Props = {
   params: Promise<{ slug: string }>; // Changed: params is now Promise
@@ -148,7 +148,7 @@ export default async function ArticleDetailPage({ params }: Props) {
               </div>
             </header>
 
-            {/* Featured Image - Client Component */}
+            {/* Featured Image */}
             <ArticleImage 
               image={article.image} 
               title={article.title} 
@@ -195,24 +195,6 @@ export default async function ArticleDetailPage({ params }: Props) {
           </Link>
         </div>
       </section>
-    </div>
-  );
-}
-
-// Separate Client Component for Image to handle onError
-'use client';
-function ArticleImage({ image, title }: { image: string; title: string }) {
-  return (
-    <div className="relative h-64 md:h-96 w-full overflow-hidden rounded-lg mb-8">
-      <Image
-        src={image || 'https://placehold.co/800x400/EBF4FF/7F9CF5?text=No+Image'}
-        alt={title}
-        fill
-        className="object-cover"
-        onError={(e) => {
-          e.currentTarget.src = 'https://placehold.co/800x400/EBF4FF/7F9CF5?text=Img+Error';
-        }}
-      />
     </div>
   );
 }

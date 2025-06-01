@@ -3,35 +3,33 @@ import PlantDetail from '@/components/plants/PlantDetail';
 import RelatedPlants from '@/components/plants/RelatedPlants';
 import PlantTabs from '@/components/plants/PlantTabs';
 import dbConnect from '@/lib/dbConnect';
-import Plant, { IPlant } from '@/lib/models/Plant';
+import Plant, { IPlant, IPlantPopulated } from '@/lib/models/Plant';
 import { Metadata, ResolvingMetadata } from 'next';
-import Link from 'next/link'; // Import Link
-import mongoose from 'mongoose';
+import Link from 'next/link';
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>; // Changed: params is now Promise
 };
 
 // Fungsi untuk mengambil data tanaman berdasarkan slug
-async function getPlantBySlug(slug: string): Promise<IPlant | null> {
+async function getPlantBySlug(slug: string): Promise<IPlantPopulated | null> {
   await dbConnect();
   try {
-    // Temukan tanaman berdasarkan slug. Pastikan slug diindeks di model Anda untuk performa.
-    // Jika relatedPlants adalah array ObjectId, kita perlu populate
+    // Temukan tanaman berdasarkan slug dan populate relatedPlants
     const plant = await Plant.findOne({ slug })
                              .populate({
                                 path: 'relatedPlants',
-                                model: 'Plant', // Pastikan nama modelnya benar
-                                select: 'name latinName image slug benefits region' // Pilih field yang dibutuhkan untuk related plants
+                                model: 'Plant',
+                                select: 'name latinName image slug benefits region'
                              })
-                             .lean(); // .lean() untuk mendapatkan objek JavaScript biasa, bukan Mongoose Document
+                             .lean();
 
     if (!plant) {
       return null;
     }
-    // Konversi ObjectId menjadi string jika perlu agar bisa diserialisasi
-    // dan pastikan semua field yang diharapkan ada dan dalam format yang benar
-    const serializedPlant = JSON.parse(JSON.stringify(plant)) as IPlant;
+
+    // Serialize dan return sebagai IPlantPopulated
+    const serializedPlant = JSON.parse(JSON.stringify(plant)) as IPlantPopulated;
     return serializedPlant;
 
   } catch (error) {
@@ -45,7 +43,7 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const slug = params.slug;
+  const { slug } = await params; // Fixed: await params first
   const plant = await getPlantBySlug(slug);
 
   if (!plant) {
@@ -58,9 +56,6 @@ export async function generateMetadata(
   return {
     title: `${plant.name} (${plant.latinName}) - Herbapedia`,
     description: `Pelajari tentang ${plant.name}, manfaat, cara penggunaan, dan informasi lengkap lainnya tentang tanaman obat tradisional ini.`,
-    // openGraph: {
-    //   images: [plant.image || '/default-plant-image.jpg'],
-    // },
   };
 }
 
@@ -68,7 +63,7 @@ export async function generateMetadata(
 export async function generateStaticParams() {
   await dbConnect();
   try {
-    const plants = await Plant.find({}, 'slug').lean(); // Ambil semua slug
+    const plants = await Plant.find({}, 'slug').lean();
     return plants.map((plant) => ({
       slug: plant.slug,
     }));
@@ -79,7 +74,7 @@ export async function generateStaticParams() {
 }
 
 export default async function PlantDetailPage({ params }: Props) {
-  const slug = params.slug;
+  const { slug } = await params; // Fixed: await params first
   const plant = await getPlantBySlug(slug);
 
   if (!plant) {
@@ -95,29 +90,16 @@ export default async function PlantDetailPage({ params }: Props) {
       </div>
     );
   }
-  
-  // Pastikan data relatedPlants yang dipass ke RelatedPlants adalah array ID atau objek yang sesuai
-  // Jika getPlantBySlug sudah melakukan populate dengan benar, plant.relatedPlants akan berisi objek tanaman terkait.
-  // Komponen RelatedPlants mungkin perlu disesuaikan untuk menerima array objek IPlant atau hanya array string ID.
-  // Untuk saat ini, kita asumsikan RelatedPlants bisa menangani array objek IPlant.
-  // Jika relatedPlants masih berupa ObjectId string setelah .lean() dan JSON.parse(JSON.stringify()),
-  // maka Anda mungkin perlu melakukan fetch data related plants lagi di dalam RelatedPlants
-  // atau menyesuaikan bagaimana data itu dipass/digunakan.
-
-  // Untuk RelatedPlants, jika ia mengharapkan array ID dan Anda sudah populate:
-  const relatedPlantIds = (plant.relatedPlants || []).map(rp => (rp as any)._id?.toString() || rp.toString()).filter(id => mongoose.Types.ObjectId.isValid(id));
-
 
   return (
     <div>
       {/* Detail Tanaman */}
-      <PlantDetail plant={plant} /> {/* Komponen ini harus menerima IPlant */}
+      <PlantDetail plant={plant as IPlant} />
       
       {/* Tab Informasi Lengkap */}
       <section className="py-12 bg-gray-50">
         <div className="container-custom">
-          {/* PlantTabs mungkin perlu 'use client' jika memiliki state/interaktivitas */}
-          <PlantTabs plant={plant} /> {/* Komponen ini harus menerima IPlant */}
+          <PlantTabs plant={plant as IPlant} />
         </div>
       </section>
       
@@ -125,14 +107,9 @@ export default async function PlantDetailPage({ params }: Props) {
       {plant.relatedPlants && plant.relatedPlants.length > 0 && (
         <section className="py-12 bg-white">
           <div className="container-custom">
-            {/* Pastikan RelatedPlants bisa menerima plant.relatedPlants (array objek IPlant yang sudah dipopulate)
-              atau hanya array ID (relatedPlantIds).
-              Jika RelatedPlants masih menggunakan data dummy atau mengharapkan format berbeda,
-              Anda perlu menyesuaikannya.
-            */}
             <RelatedPlants 
               currentPlantId={plant._id ? plant._id.toString() : ''} 
-              relatedPlantsData={plant.relatedPlants as IPlant[]} // Mengirim data tanaman terkait yang sudah dipopulate
+              relatedPlantsData={plant.relatedPlants}
             />
           </div>
         </section>

@@ -15,8 +15,6 @@ export default function RelatedPlants({
   relatedPlantsData,
 }: RelatedPlantsProps) {
   // If relatedPlantsData is already populated, use it directly
-  // Otherwise, we could fetch from API, but since it's already populated, we use the data
-
   if (!relatedPlantsData || relatedPlantsData.length === 0) {
     return null;
   }
