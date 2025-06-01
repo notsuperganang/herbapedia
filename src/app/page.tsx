@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import FeaturedPlants from '@/components/home/FeaturedPlants';
 import HeroSection from '@/components/home/HeroSection';
