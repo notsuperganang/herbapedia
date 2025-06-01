@@ -69,7 +69,7 @@ async function seedDatabase() {
         habitat: "Jahe tumbuh baik di daerah tropis dengan curah hujan yang cukup. Tanaman ini memerlukan tanah yang gembur, subur, dan memiliki drainase yang baik.",
         cultivation: "Jahe dapat ditanam dengan cara menyemaikan rimpang yang sudah bertunas. Tanaman ini membutuhkan naungan parsial dan penyiraman yang teratur.",
         history: "Jahe telah digunakan dalam pengobatan tradisional Indonesia selama berabad-abad. Tanaman ini juga menjadi komoditas ekspor penting.",
-        image: "https://images.unsplash.com/photo-1599602468040-19a8de0a4ae3?w=600&h=400&fit=crop",
+        image: "https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2022/10/10040846/Jarang-Diketahui-Ini-X-Manfaat-Jahe-untuk-Kesehatan-Tubuh.jpg",
         slug: "jahe",
         scientificClassification: {
           kingdom: "Plantae",
@@ -92,7 +92,7 @@ async function seedDatabase() {
         habitat: "Kunyit tumbuh baik di daerah tropis dan subtropis dengan kelembaban tinggi. Tanaman ini memerlukan tanah yang subur dan drainase yang baik.",
         cultivation: "Penanaman kunyit dilakukan dengan menyemaikan rimpang. Tanaman ini membutuhkan sinar matahari penuh hingga naungan parsial.",
         history: "Kunyit telah menjadi bagian penting dalam pengobatan Ayurveda dan jamu tradisional Indonesia. Tanaman ini juga digunakan sebagai pewarna alami.",
-        image: "https://images.unsplash.com/photo-1609501676725-7186f734b231?w=600&h=400&fit=crop",
+        image: "https://res.cloudinary.com/dk0z4ums3/image/upload/v1683291053/attached_image/7-manfaat-kunyit-untuk-kulit-yang-jarang-diketahui.jpg",
         slug: "kunyit",
         scientificClassification: {
           kingdom: "Plantae",
@@ -115,7 +115,7 @@ async function seedDatabase() {
         habitat: "Temulawak tumbuh di daerah tropis dengan curah hujan tinggi. Tanaman ini memerlukan tanah yang gembur dan kaya bahan organik.",
         cultivation: "Penanaman menggunakan rimpang yang sehat. Temulawak membutuhkan naungan dan kelembaban yang cukup untuk tumbuh optimal.",
         history: "Temulawak merupakan tanaman endemik Indonesia dan telah digunakan dalam pengobatan tradisional sejak zaman kerajaan Majapahit.",
-        image: "https://images.unsplash.com/photo-1585729334455-867c62f6cf75?w=600&h=400&fit=crop",
+        image: "https://desagrogol.gunungkidulkab.go.id/assets/files/dokumen/TEMULAWAK.jpg",
         slug: "temulawak",
         scientificClassification: {
           kingdom: "Plantae",
@@ -138,7 +138,7 @@ async function seedDatabase() {
         habitat: "Sirih tumbuh baik di daerah tropis yang lembab. Tanaman ini memerlukan naungan dan kelembaban tinggi untuk pertumbuhan optimal.",
         cultivation: "Sirih dapat diperbanyak dengan stek batang. Tanaman ini membutuhkan penyangga untuk merambat dan penyiraman yang teratur.",
         history: "Sirih telah digunakan dalam budaya Indonesia sejak zaman nenek moyang. Daun sirih juga memiliki nilai simbolis dalam upacara adat.",
-        image: "https://images.unsplash.com/photo-1616094392829-b0b3e9a5e17e?w=600&h=400&fit=crop",
+        image: "https://mysiloam-api.siloamhospitals.com/public-asset/website-cms/website-cms-16771199596118035.webp",
         slug: "sirih",
         scientificClassification: {
           kingdom: "Plantae",
@@ -161,7 +161,7 @@ async function seedDatabase() {
         habitat: "Lidah buaya tumbuh baik di daerah kering dengan sinar matahari penuh. Tanaman ini tahan terhadap kekeringan dan tidak memerlukan banyak air.",
         cultivation: "Lidah buaya mudah ditanam dan dirawat. Tanaman ini dapat diperbanyak dengan anakan dan memerlukan drainase yang baik.",
         history: "Lidah buaya telah digunakan dalam pengobatan tradisional di berbagai belahan dunia, termasuk Indonesia, selama ribuan tahun.",
-        image: "https://images.unsplash.com/photo-1596516109370-29001a8dd262?w=600&h=400&fit=crop",
+        image: "https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2023/10/17044350/Ini-Alasan-Aloe-Vera-Baik-untuk-Kulit-Kering.jpg.webp",
         slug: "lidah-buaya",
         scientificClassification: {
           kingdom: "Plantae",
@@ -184,7 +184,7 @@ async function seedDatabase() {
         habitat: "Sambiloto tumbuh baik di daerah tropis yang lembab. Tanaman ini dapat tumbuh di berbagai jenis tanah dan tahan terhadap hama.",
         cultivation: "Sambiloto dapat ditanam dari biji atau stek. Tanaman ini tumbuh cepat dan dapat dipanen dalam waktu 3-4 bulan.",
         history: "Sambiloto telah digunakan dalam pengobatan tradisional Asia selama berabad-abad dan dikenal sebagai 'echinacea Asia'.",
-        image: "https://images.unsplash.com/photo-1571019613297-4c180f38a42a?w=600&h=400&fit=crop",
+        image: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Andrographis_paniculata_001.JPG",
         slug: "sambiloto",
         scientificClassification: {
           kingdom: "Plantae",
@@ -207,7 +207,7 @@ async function seedDatabase() {
         habitat: "Meniran tumbuh liar di daerah tropis dan dapat ditemukan di halaman rumah. Tanaman ini menyukai tanah yang lembab dan naungan parsial.",
         cultivation: "Meniran mudah tumbuh dan dapat menyebar secara alami. Tanaman ini tidak memerlukan perawatan khusus dan tahan terhadap berbagai kondisi.",
         history: "Meniran telah digunakan dalam pengobatan tradisional Ayurveda dan jamu Indonesia untuk mengatasi masalah ginjal dan hati.",
-        image: "https://images.unsplash.com/photo-1573048251703-83b5c2e5b7a2?w=600&h=400&fit=crop",
+        image: "https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2022/08/11041114/X-Manfaat-Daun-Meniran-untuk-Kesehatan-Tubuh.jpg.webp",
         slug: "meniran",
         scientificClassification: {
           kingdom: "Plantae",
@@ -230,7 +230,7 @@ async function seedDatabase() {
         habitat: "Pegagan tumbuh di daerah lembab seperti pinggir sungai, sawah, dan tempat yang tergenang air. Tanaman ini menyukai naungan parsial.",
         cultivation: "Pegagan mudah ditanam dan dapat diperbanyak dengan stolon. Tanaman ini membutuhkan kelembaban tinggi dan penyiraman teratur.",
         history: "Pegagan telah digunakan dalam pengobatan tradisional Asia selama ribuan tahun dan dikenal sebagai 'makanan otak' alami.",
-        image: "https://images.unsplash.com/photo-1583039544909-6966726f9ac0?w=600&h=400&fit=crop",
+        image: "https://ners.unair.ac.id/site/images/Lihat/daun_pegagan.png",
         slug: "pegagan",
         scientificClassification: {
           kingdom: "Plantae",
@@ -253,7 +253,7 @@ async function seedDatabase() {
         habitat: "Binahong tumbuh baik di daerah tropis dengan kelembaban tinggi. Tanaman ini memerlukan penyangga untuk merambat dan naungan parsial.",
         cultivation: "Binahong dapat diperbanyak dengan stek batang atau umbi. Tanaman ini tumbuh cepat dan memerlukan pemangkasan rutin.",
         history: "Binahong berasal dari Amerika Selatan dan telah menjadi populer di Indonesia sebagai tanaman obat keluarga dalam beberapa dekade terakhir.",
-        image: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=600&h=400&fit=crop",
+        image: "https://res.cloudinary.com/dk0z4ums3/image/upload/v1679881074/attached_image/4-efek-samping-daun-binahong-yang-harus-diwaspadai.jpg",
         slug: "daun-binahong",
         scientificClassification: {
           kingdom: "Plantae",
@@ -276,7 +276,7 @@ async function seedDatabase() {
         habitat: "Kencur tumbuh baik di dataran rendah dengan iklim tropis. Tanaman ini memerlukan tanah yang gembur dan drainase yang baik.",
         cultivation: "Kencur ditanam dengan menyemaikan rimpang. Tanaman ini membutuhkan naungan parsial dan penyiraman yang tidak berlebihan.",
         history: "Kencur telah menjadi bagian penting dalam kuliner dan pengobatan tradisional Indonesia, terutama dalam pembuatan jamu.",
-        image: "https://images.unsplash.com/photo-1599602313039-6b8e7ad13a22?w=600&h=400&fit=crop",
+        image: "https://res.cloudinary.com/dk0z4ums3/image/upload/v1658726281/attached_image/khasiat-kencur-bisa-menyaingi-efek-obat-obatan-modern.jpg",
         slug: "kencur",
         scientificClassification: {
           kingdom: "Plantae",
@@ -317,7 +317,7 @@ async function seedDatabase() {
           
           <p>Dengan memiliki tanaman obat di rumah, kita dapat mengurangi ketergantungan pada obat-obatan kimia dan hidup lebih sehat secara alami.</p>
         `,
-        image: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800&h=400&fit=crop",
+        image: "https://d1bpj0tv6vfxyp.cloudfront.net/articles/591497_20-6-2023_7-29-52.jpeg",
         author: "Dr. Sari Herbal",
         date: new Date('2024-12-01'),
         slug: "10-tanaman-obat-wajib-halaman-rumah",
@@ -359,7 +359,7 @@ async function seedDatabase() {
           
           <p>Konsumsi kunyit secara teratur dapat membantu menjaga kesehatan secara alami dan mencegah berbagai penyakit.</p>
         `,
-        image: "https://images.unsplash.com/photo-1609501676725-7186f734b231?w=800&h=400&fit=crop",
+        image: "https://d1bpj0tv6vfxyp.cloudfront.net/articles/195235_27-1-2021_18-30-52.webp",
         author: "Prof. Herbal Indonesia",
         date: new Date('2024-11-28'),
         slug: "manfaat-kunyit-kesehatan-cara-pengolahan",
@@ -414,7 +414,7 @@ async function seedDatabase() {
           
           <p>Konservasi tanaman obat bukan hanya tanggung jawab pemerintah, tetapi juga setiap individu yang peduli pada warisan budaya dan lingkungan Indonesia.</p>
         `,
-        image: "https://images.unsplash.com/photo-1441260038675-7329ab4cc264?w=800&h=400&fit=crop",
+        image: "https://econusa.id/wp-content/uploads/2022/06/honai-suku-dani.jpg",
         author: "Dr. Konservasi Alam",
         date: new Date('2024-11-25'),
         slug: "konservasi-tanaman-obat-warisan-nenek-moyang",
@@ -489,7 +489,7 @@ async function seedDatabase() {
           
           <p>Apotek hidup yang terawat dengan baik akan memberikan manfaat jangka panjang untuk kesehatan keluarga dan lingkungan.</p>
         `,
-        image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=400&fit=crop",
+        image: "https://jendela360.com/info/wp-content/uploads/2020/06/apotik-hidup-3.jpg",
         author: "Tim Herbapedia",
         date: new Date('2024-11-22'),
         slug: "cara-membuat-apotek-hidup-rumah-panduan-lengkap",
@@ -548,7 +548,7 @@ async function seedDatabase() {
           
           <p>Jamu bukan hanya minuman, tetapi juga filosofi hidup sehat yang perlu dilestarikan dan diteruskan kepada generasi mendatang.</p>
         `,
-        image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=400&fit=crop",
+        image: "https://stifera.ac.id/wp-content/uploads/2023/07/622deb4988ac0.jpg",
         author: "Mbok Jamu Tradisional",
         date: new Date('2024-11-20'),
         slug: "jamu-tradisional-indonesia-khasiat-resep-turun-temurun",
@@ -635,7 +635,7 @@ async function seedDatabase() {
           
           <p>Integrasi teknologi modern dengan kearifan tradisional akan membawa budidaya tanaman obat Indonesia ke level yang lebih tinggi, mendukung industri farmasi herbal yang berkelanjutan.</p>
         `,
-        image: "https://images.unsplash.com/photo-1574263867128-a2d5d3b6f6b3?w=800&h=400&fit=crop",
+        image: "https://pertanian.sultengprov.go.id/wp-content/uploads/2022/12/smart-farming-iot-agriculture.webp",
         author: "Dr. Agritech Herbal",
         date: new Date('2024-11-18'),
         slug: "teknologi-modern-budidaya-tanaman-obat",
@@ -740,7 +740,7 @@ async function seedDatabase() {
           
           <p>Ingatlah bahwa keamanan selalu menjadi prioritas utama dalam penggunaan tanaman obat. Konsultasikan dengan ahli herbal atau tenaga medis sebelum menggunakan tanaman yang belum familiar.</p>
         `,
-        image: "https://images.unsplash.com/photo-1574263867128-a2d5d3b6f6b3?w=800&h=400&fit=crop",
+        image: "https://asset.kompas.com/crop/0x18:1000x518/780x390/data/photo/2018/09/24/1319032216.jpg",
         author: "Dr. Toksikologi Herbal",
         date: new Date('2024-11-15'),
         slug: "panduan-mengenal-tanaman-obat-beracun-cara-menghindari",
@@ -901,7 +901,7 @@ async function seedDatabase() {
           
           <p>Budidaya jahe sangat menguntungkan karena permintaan yang tinggi dan teknik budidaya yang relatif mudah. Dengan perawatan yang tepat, Anda dapat memperoleh hasil panen yang optimal dan berkualitas tinggi.</p>
         `,
-        image: "https://images.unsplash.com/photo-1599602468040-19a8de0a4ae3?w=800&h=400&fit=crop",
+        image: "https://tanilink.com/uploads/berita/2024-05-08/cover_jahe.png",
         author: "Petani Jahe Sukses",
         date: new Date('2024-11-12'),
         slug: "budidaya-jahe-penanaman-hingga-panen-pemula",
@@ -1086,7 +1086,7 @@ async function seedDatabase() {
           
           <p>Kearifan lokal bukan hanya warisan masa lalu, tetapi juga blueprint untuk masa depan pengobatan yang holistik, berkelanjutan, dan berbasis alam. Melestarikan dan mengembangkan kearifan ini adalah tanggung jawab bersama untuk generasi mendatang.</p>
         `,
-        image: "https://images.unsplash.com/photo-1571019613297-4c180f38a42a?w=800&h=400&fit=crop",
+        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7yaiOKdn0VmdSu9kUMj4T0WfIgzPghKQylZ0yibruM3TcPKrNw75zV4SmGCgZCU89I9DFG9hK7XDGTgQeBSt62TzRAirvGostzkwDL_30P1WKI4EXHkETLqcyswrsTPU3EK8_PCieLTSTaobcJuYfm_N-jKqvVqUgsZlurXcxzDuriDhbxsnP77thayCj/s860/pengobatan-alternatif-medium_1661004670.webp",
         author: "Prof. Antropologi Medis",
         date: new Date('2024-11-10'),
         slug: "kearifan-lokal-pengobatan-tradisional-indonesia",
@@ -1294,7 +1294,7 @@ async function seedDatabase() {
           
           <p>Mengatasi insomnia dengan tanaman obat alami membutuhkan kesabaran dan konsistensi. Kombinasikan dengan pola hidup sehat untuk hasil yang optimal. Ingatlah bahwa setiap orang berbeda, sehingga mungkin perlu mencoba beberapa tanaman untuk menemukan yang paling cocok.</p>
         `,
-        image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&h=400&fit=crop",
+        image: "https://i.ytimg.com/vi/jQrFfHqpOPA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCeyPw-g7x2cffY40oPG2kooAzrqw",
         author: "Dr. Sleep Medicine",
         date: new Date('2024-11-08'),
         slug: "mengatasi-insomnia-tanaman-obat-alami",
