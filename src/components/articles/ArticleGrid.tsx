@@ -1,108 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-// Data artikel (dummy)
-const articles = [
-  {
-    id: 1,
-    title: "Cara Menanam Jahe di Rumah dengan Mudah",
-    excerpt:
-      "Panduan lengkap untuk menanam dan merawat tanaman jahe di pekarangan rumah Anda, mulai dari persiapan media tanam hingga pemanenan.",
-    image: "/articles/jahe-tanam.png",
-    author: "Dr. Rina Herbal",
-    date: "15 Mar 2025",
-    slug: "cara-menanam-jahe-di-rumah",
-    category: "Panduan Menanam",
-    readTime: "8 menit",
-  },
-  {
-    id: 2,
-    title: "Manfaat Kunyit untuk Sistem Pencernaan Anda",
-    excerpt:
-      "Temukan berbagai manfaat kunyit untuk kesehatan sistem pencernaan dan bagaimana cara konsumsi yang tepat untuk hasil maksimal.",
-    image: "/articles/kunyit-gastro.png",
-    author: "Prof. Budi Santoso",
-    date: "28 Feb 2025",
-    slug: "manfaat-kunyit-untuk-pencernaan",
-    category: "Manfaat Kesehatan",
-    readTime: "6 menit",
-  },
-  {
-    id: 3,
-    title: "Pelestarian Tanaman Obat Langka di Indonesia",
-    excerpt:
-      "Upaya konservasi untuk menyelamatkan tanaman obat langka yang terancam punah di berbagai wilayah Indonesia.",
-    image: "/articles/konservasi.png",
-    author: "Dewi Lestari",
-    date: "10 Feb 2025",
-    slug: "pelestarian-tanaman-obat-langka",
-    category: "Konservasi",
-    readTime: "10 menit",
-  },
-  {
-    id: 4,
-    title: "Peran Tanaman Obat dalam Upacara Adat Jawa",
-    excerpt:
-      "Mengenal berbagai jenis tanaman obat yang digunakan dalam upacara adat dan ritual tradisional masyarakat Jawa.",
-    image: "/articles/ritual-jawa.jpg",
-    author: "Prof. Slamet Raharjo",
-    date: "5 Feb 2025",
-    slug: "tanaman-obat-upacara-adat-jawa",
-    category: "Budaya Tradisional",
-    readTime: "12 menit",
-  },
-  {
-    id: 5,
-    title: "Mengenal Jamu: Warisan Obat Tradisional Indonesia",
-    excerpt:
-      "Sejarah panjang jamu sebagai minuman kesehatan tradisional Indonesia dan ragam manfaatnya yang telah terbukti secara turun-temurun.",
-    image: "/articles/jamu.jpg",
-    author: "Dr. Maya Wijaya",
-    date: "28 Jan 2025",
-    slug: "mengenal-jamu-warisan-obat-tradisional",
-    category: "Budaya Tradisional",
-    readTime: "9 menit",
-  },
-  {
-    id: 6,
-    title: "5 Tips Merawat Tanaman Obat di Musim Kemarau",
-    excerpt:
-      "Panduan praktis untuk menjaga tanaman obat Anda tetap sehat dan subur selama musim kemarau panjang. Membantu menjaga tanamana anda tetap fit",
-    image: "/articles/dry-season.jpg",
-    author: "Hendra Tani",
-    date: "15 Jan 2025",
-    slug: "tips-merawat-tanaman-obat-musim-kemarau",
-    category: "Tips dan Trik",
-    readTime: "5 menit",
-  },
-  {
-    id: 7,
-    title: "Studi Terbaru: Ekstrak Temulawak Efektif Meningkatkan Imunitas",
-    excerpt:
-      "Penelitian terbaru menunjukkan bahwa ekstrak temulawak memiliki potensi untuk meningkatkan sistem kekebalan tubuh manusia.",
-    image: "/articles/research.jpg",
-    author: "Dr. Aditya, Ph.D",
-    date: "5 Jan 2025",
-    slug: "studi-temulawak-meningkatkan-imunitas",
-    category: "Penelitian & Inovasi",
-    readTime: "7 menit",
-  },
-  {
-    id: 8,
-    title: "Membuat Kebun Vertikal Tanaman Obat di Lahan Terbatas",
-    excerpt:
-      "Solusi cerdas untuk menanam berbagai tanaman obat di rumah dengan lahan terbatas menggunakan sistem kebun vertikal.",
-    image: "/articles/vertical-garden.png",
-    author: "Indra Permana",
-    date: "28 Dec 2024",
-    slug: "kebun-vertikal-tanaman-obat-lahan-terbatas",
-    category: "Panduan Menanam",
-    readTime: "8 menit",
-  },
-];
+import { IArticle } from '@/lib/models/Article';
 
 // Opsi sort
 const sortOptions = [
@@ -113,8 +14,39 @@ const sortOptions = [
 ];
 
 export default function ArticleGrid() {
+  const [articles, setArticles] = useState<IArticle[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("date-desc");
+
+  // Fetch articles from API
+  useEffect(() => {
+    const fetchArticles = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch('/api/articles');
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.error || 'Failed to fetch articles');
+        }
+        const data = await res.json();
+        if (data.success) {
+          setArticles(data.data);
+        } else {
+          throw new Error(data.error || 'API returned success:false');
+        }
+      } catch (err: any) {
+        setError(err.message);
+        console.error("Error fetching articles:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticles();
+  }, []);
 
   // Filter artikel berdasarkan pencarian
   const filteredArticles = articles.filter(
@@ -133,10 +65,42 @@ export default function ArticleGrid() {
     } else if (sortBy === "title-asc") {
       return a.title.localeCompare(b.title);
     } else if (sortBy === "read-time-asc") {
-      return parseInt(a.readTime) - parseInt(b.readTime);
+      const aTime = parseInt(a.readTime || "0");
+      const bTime = parseInt(b.readTime || "0");
+      return aTime - bTime;
     }
     return 0;
   });
+
+  // Format date helper
+  const formatDate = (dateString: string | Date) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('id-ID', {
+      day: 'numeric',
+      month: 'short', 
+      year: 'numeric'
+    });
+  };
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="text-center py-10">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
+        <p className="mt-4 text-gray-600">Memuat artikel...</p>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="p-4 bg-red-100 text-red-700 rounded-md">
+        <h3 className="font-semibold">Error loading articles</h3>
+        <p>{error}</p>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -185,21 +149,24 @@ export default function ArticleGrid() {
       {/* Results */}
       <div className="mb-4">
         <p className="text-sm text-gray-500">
-          Menampilkan {sortedArticles.length} artikel
+          Menampilkan {sortedArticles.length} dari {articles.length} artikel
         </p>
       </div>
 
       {/* Article Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {sortedArticles.map((article) => (
-          <Link key={article.id} href={`/artikel/${article.slug}`}>
+          <Link key={article._id as string} href={`/artikel/${article.slug}`}>
             <article className="card h-full hover:translate-y-[-5px] transition-all duration-300">
               <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
                 <Image
-                  src={article.image}
+                  src={article.image || 'https://placehold.co/600x400/EBF4FF/7F9CF5?text=No+Image'}
                   alt={article.title}
                   fill
                   className="object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://placehold.co/600x400/EBF4FF/7F9CF5?text=Img+Error';
+                  }}
                 />
               </div>
 
@@ -227,9 +194,13 @@ export default function ArticleGrid() {
                     <span className="text-gray-700">{article.author}</span>
                   </div>
                   <div className="flex items-center text-gray-500">
-                    <span className="mr-2">{article.date}</span>
-                    <span>•</span>
-                    <span className="ml-2">{article.readTime}</span>
+                    <span className="mr-2">{formatDate(article.date)}</span>
+                    {article.readTime && (
+                      <>
+                        <span>•</span>
+                        <span className="ml-2">{article.readTime}</span>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -239,7 +210,7 @@ export default function ArticleGrid() {
       </div>
 
       {/* Empty State */}
-      {sortedArticles.length === 0 && (
+      {sortedArticles.length === 0 && !loading && (
         <div className="bg-white rounded-lg shadow-sm p-8 text-center">
           <svg
             className="h-12 w-12 mx-auto text-gray-400 mb-4"
@@ -256,20 +227,25 @@ export default function ArticleGrid() {
             />
           </svg>
           <h3 className="text-lg font-semibold text-gray-800 mb-2">
-            Tidak Ditemukan
+            {searchTerm ? "Tidak Ditemukan" : "Belum Ada Artikel"}
           </h3>
           <p className="text-gray-600">
-            Maaf, tidak ada artikel yang sesuai dengan pencarian "{searchTerm}".
-            Coba kata kunci lain atau reset filter.
+            {searchTerm 
+              ? `Maaf, tidak ada artikel yang sesuai dengan pencarian "${searchTerm}". Coba kata kunci lain atau reset filter.`
+              : "Saat ini belum ada artikel yang tersedia. Silakan tambahkan artikel melalui panel admin."
+            }
           </p>
         </div>
       )}
 
-      {/* Pagination */}
+      {/* Simple Pagination Placeholder */}
       {sortedArticles.length > 0 && (
         <div className="mt-8 flex justify-center">
           <nav className="flex items-center">
-            <button className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 mr-2">
+            <button 
+              className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 mr-2 disabled:opacity-50"
+              disabled
+            >
               <svg
                 className="h-5 w-5 mr-1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -285,37 +261,14 @@ export default function ArticleGrid() {
               Sebelumnya
             </button>
 
-            <div className="hidden md:flex">
-              <a
-                href="#"
-                className="inline-flex items-center px-4 py-2 border border-primary-500 rounded-md text-sm font-medium text-primary-700 bg-primary-50"
-              >
-                1
-              </a>
-              <a
-                href="#"
-                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
-              >
-                2
-              </a>
-              <a
-                href="#"
-                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
-              >
-                3
-              </a>
-              <span className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700">
-                ...
-              </span>
-              <a
-                href="#"
-                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
-              >
-                8
-              </a>
-            </div>
+            <span className="inline-flex items-center px-4 py-2 border border-primary-500 rounded-md text-sm font-medium text-primary-700 bg-primary-50">
+              1
+            </span>
 
-            <button className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 ml-2">
+            <button 
+              className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 ml-2 disabled:opacity-50"
+              disabled
+            >
               Berikutnya
               <svg
                 className="h-5 w-5 ml-1"
